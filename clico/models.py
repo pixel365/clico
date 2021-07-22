@@ -93,8 +93,8 @@ class Link(BaseModel):
 
     @property
     def full_target_url(self) -> str:
-        utm = [f'{k}={v}' for k, v in self.dict().items() if 'utm_' in k and v]
-        return f'{self.target_url}?{"&".join(utm)}' if len(utm) else self.target_url
+        utm = '&'.join(tuple(f'{k}={v}' for k, v in self.dict().items() if 'utm_' in k and v))
+        return f'{self.target_url}?{utm}' if len(utm) else self.target_url
 
     @property
     def link_id(self) -> Optional[str]:

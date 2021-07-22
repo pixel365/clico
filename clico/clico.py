@@ -11,7 +11,7 @@ API_URL = 'https://cli.com/api/v1'
 
 class Clico:
     def __init__(self, api_key: Optional[str] = None):
-        self._api_key: Optional[str] = api_key if api_key else os.getenv('CLICO_API_KEY')
+        self._api_key: Optional[str] = api_key or os.getenv('CLICO_API_KEY')
 
         if not self._api_key:
             raise ValueError('API key is required')
