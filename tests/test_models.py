@@ -2,10 +2,16 @@ import json
 import unittest
 from enum import EnumMeta
 
+from pydantic import ValidationError
+
+from clico import Clico
 from clico.models import Result, Error, Domain, Integration, Link
 
 
 class TestModels(unittest.TestCase):
+    def setUp(self):
+        self.clico = Clico(api_key='api_key')
+
     def test_result_model(self):
         properties = json.loads(Result.schema_json()).get('properties')
 
@@ -69,3 +75,9 @@ class TestModels(unittest.TestCase):
         self.assertIn('utm_term', properties)
         self.assertIn('callback_url', properties)
         self.assertIn('short_link', properties)
+
+        with self.assertRaises(ValidationError) as ctx:
+            Link(**{})
+
+        self.assertIsInstance(ctx.exception, ValidationError)
+        self.assertTupleEqual(ctx.exception.errors()[0].get('loc'), ('target_url',))

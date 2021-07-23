@@ -29,15 +29,15 @@ class Clico:
         return Result(**r.json())
 
     def single_link(self, link: Link) -> Union[Error, Link]:
-        assert isinstance(link, Link)
+        assert isinstance(link, Link), f'Type `{type(link).__name__}` is not an instance of `Link` object'
         api_result = self._call(path='/link', data=link.dict())
         if isinstance(api_result, Error):
             return api_result
         return Link(**{**link.dict(), **{'short_link': api_result.result}})
 
     def multiple_links(self, links: List[Link]) -> Union[Error, List[Link]]:
-        links = links[:10]
-        assert len(links) > 0
+        assert len(links) > 0, f'Type `{type(links).__name__}` is not an instance of `list` object'
+        links = links[:1000]
         api_result = self._call(path='/links', data=[link.dict() for link in links])
         if isinstance(api_result, Error):
             return api_result
@@ -48,7 +48,7 @@ class Clico:
         return result
 
     def integration(self, data: Integration) -> Union[Error, Integration]:
-        assert isinstance(data, Integration)
+        assert isinstance(data, Integration), f'Type `{type(data).__name__}` is not an instance of `Integration` object'
         api_result = self._call(path='/integration', data=data.dict())
         if isinstance(api_result, Error):
             return api_result
