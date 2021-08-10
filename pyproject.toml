@@ -1,7 +1,7 @@
 [project]
 name = "clico"
 description = "The library implements create short links via https://cli.com (Ex. cli.co) service."
-version = "0.1"
+version = "0.2"
 requires-python = ">=3.7"
 license = { file = "LICENSE" }
 keywords = ["cli.com", "cli.co", "clico", "short link"]

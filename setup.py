@@ -9,7 +9,7 @@ setup(
     name='clico',
     packages=find_packages(),
     python_requires='>=3.7',
-    version='0.1',
+    version='0.2',
     license='Apache Software License',
     description='The library implements create short links via https://cli.com (Ex. cli.co) service.',
     long_description=README,
